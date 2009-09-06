@@ -1,0 +1,8 @@
+1. write externals in my_lib.c
+2. make sure m_pd.h is linked to in the current directory
+3. gcc -shared -o my_lib.pd_linux my_lib.c
+  if library with multiple externals:
+    4. pd -lib my_lib &
+  ow
+    4. pd &
+    5. create an object "my_lib"
