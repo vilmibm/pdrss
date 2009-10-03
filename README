@@ -1,6 +1,26 @@
 A very simple rss reader for puredata
 
-Changelog:
+REQUIREMENTS:
+    puredata > 0.38
+    py/pyext externals
+
+USAGE:
+    in pd:
+        create pyext rss rss
+        send 'url <string>' to second inlet to set feed location
+        send a bang to second inlet to output the next feed item
+
+NOTES:
+    Incredibly rough, first draft.
+
+AUTHOR:
+    Nathaniel Smith
+    nathanielksmith@gmail.com
+
+CHANGELOG:
+
+0.11
+    --More documentation
 
 0.1
     --Initial release
