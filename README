@@ -1,0 +1,9 @@
+A very simple rss reader for puredata
+
+Changelog:
+
+0.1
+    --Initial release
+    --Heavily biased towards twitter feeds
+    --Ignores unicode items
+    --Just outputs symbols in pd
