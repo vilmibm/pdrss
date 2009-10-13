@@ -12,7 +12,7 @@ class rss(pyext._class):
     items = []
     url   = ""
 
-    _inlets  = 1 # tried leaving this out, wouldn't let me specify callbacks for outlet 0...
+    _inlets  = 1 # tried leaving this out, wouldn't let me specify callbacks for inlet 0...
     _outlets = 1 # tried leaving this out, wouldn't let me access 0th or 1st outlet...
 
     def __init__(self,*args):
@@ -37,8 +37,10 @@ class rss(pyext._class):
         print "Repopulating items array"
         self.index = 0
         self.items = map(lambda x: x.firstChild.data, self.dom.getElementsByTagName("description"))
+        self.items = map(lambda x: x[0:300], self.items[1:]); # remove first items (channel desc) and crop each text item
 
         # XXX I want unicode support, but for some reason python makes it hard. Filter unicode strings for now.
+        # XXX This is a pretty bootleg way of handling this.
         print "Items now has %s entries. Filtering unicode..." % len(self.items)
         def can_decode(t):
             try:
