@@ -17,7 +17,15 @@ AUTHOR:
     Nathaniel Smith
     nathanielksmith@gmail.com
 
+FUTURE DIRECTIONS:
+    add atom support
+    make rss support more robust
+
 CHANGELOG:
+
+0.5
+    --First working version
+    --Includes rss.pd, which uses flite to text-to-speech rss.py's output
 
 0.11
     --More documentation
