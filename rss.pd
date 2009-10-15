@@ -15,10 +15,14 @@
 -1;
 #X msg 93 145 stop;
 #X obj 60 278 dac~;
-#X obj 170 163 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 191 149 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X obj 52 194 tabplay~ words;
 #X obj 11 102 flite words;
+#X text 406 9 pdrss;
+#X text 406 22 by nathanielksmith;
+#X text 166 83 start me;
+#X text 127 145 stop me;
 #X connect 0 0 13 0;
 #X connect 1 0 0 1;
 #X connect 2 0 0 1;
