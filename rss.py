@@ -6,6 +6,8 @@
 import pyext
 import urllib2
 import xml.dom.minidom
+from unescape import unescape
+import re
 
 class rss(pyext._class):
     index = 0
@@ -36,20 +38,22 @@ class rss(pyext._class):
 
         print "Repopulating items array"
         self.index = 0
-        self.items = map(lambda x: x.firstChild.data, self.dom.getElementsByTagName("description"))
-        self.items = map(lambda x: x[0:300], self.items[1:]); # remove first items (channel desc) and crop each text item
+        # this monster achieves:
+        #   - slice the first description node off (it's a channel desc)
+        #   - crop each string to a max of 300 chars
+        #   - URI decode text
+        #   - unescape HTML entities
+        self.items = map( lambda x: unescape( urllib2.unquote( x.firstChild.data))[0:300], \
+                          self.dom.getElementsByTagName("description")[1:]
+        )
 
-        # XXX I want unicode support, but for some reason python makes it hard. Filter unicode strings for now.
-        # XXX This is a pretty bootleg way of handling this.
-        print "Items now has %s entries. Filtering unicode..." % len(self.items)
-        def can_decode(t):
-            try:
-                str(t)
-                return True
-            except:
-                return False
-        self.items = filter(can_decode, self.items)
-
+        # No unicode support in puredata (at least not via pyext. It claims it can't convert) 
+        print "Filtering unicode characters..."
+        def maybe_delete(c):
+            try:    return str(c)
+            except: return " "
+        self.items = map(lambda x: ''.join(x), map(lambda y: map(maybe_delete, y), self.items))
+        
         print "Items now has %s entries" % len(self.items)
 
     def _fetch_next(self):
@@ -57,5 +61,6 @@ class rss(pyext._class):
             self._repopulate()
         print "Trying to fetch item at index %s" % self.index
         ret = self.items[self.index]
+        print "Fetched: %s" % ret
         self.index += 1
         return ret
