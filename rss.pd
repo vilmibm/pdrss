@@ -1,15 +1,35 @@
-#N canvas 830 120 450 300 10;
-#X obj 166 127 pyext rss rss;
-#X obj 81 39 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+#N canvas 1602 115 563 468 10;
+#X obj 11 66 pyext rss rss;
+#X obj 148 84 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 136 198 print;
-#X msg 108 40 url http://twitter.com/statuses/public_timeline.rss;
-#X msg 23 96 reload;
-#X obj 48 6 loadbang;
-#X msg 212 73 url http://feed.cracktheplates.com;
-#X connect 0 0 2 0;
+#X msg 62 31 url http://twitter.com/statuses/public_timeline.rss;
+#X msg 9 31 reload;
+#X obj 9 6 loadbang;
+#X msg 111 55 url http://feed.cracktheplates.com;
+#N canvas 0 0 450 300 (subpatch) 0;
+#X array words 789738 float 0;
+#X coords 0 1 789737 -1 200 140 1;
+#X restore 230 104 graph;
+#X msg 46 144 start;
+#X obj 16 178 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 93 145 stop;
+#X obj 60 278 dac~;
+#X obj 170 163 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 52 194 tabplay~ words;
+#X obj 11 102 flite words;
+#X connect 0 0 13 0;
 #X connect 1 0 0 1;
-#X connect 3 0 0 1;
-#X connect 4 0 0 0;
-#X connect 5 0 3 0;
-#X connect 6 0 0 1;
+#X connect 2 0 0 1;
+#X connect 3 0 0 0;
+#X connect 4 0 2 0;
+#X connect 5 0 0 1;
+#X connect 7 0 8 0;
+#X connect 8 0 12 0;
+#X connect 9 0 12 0;
+#X connect 11 0 0 1;
+#X connect 12 0 10 0;
+#X connect 12 0 10 1;
+#X connect 12 1 11 0;
+#X connect 13 0 7 0;

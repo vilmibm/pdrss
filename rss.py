@@ -7,7 +7,6 @@ import pyext
 import urllib2
 import xml.dom.minidom
 from unescape import unescape
-import re
 
 class rss(pyext._class):
     index = 0
@@ -24,7 +23,8 @@ class rss(pyext._class):
             self._repopulate()
     
     def bang_1(self):
-        self._outlet(1, str(self._fetch_next()))
+        words = str(self._fetch_next()).split()
+        self._outlet(1, words)
 
     def url_1(self, arg):
         arg = str(arg)
